@@ -9,7 +9,7 @@ Companion to [`codeanchor`](https://github.com/your-org/codeanchor) CLI — the 
 ## Installation
 
 ```bash
-npm install --save-dev eslint-plugin-codeanchor
+npm install --save-dev @farisabujolban/eslint-plugin-codeanchor
 ```
 
 ---
@@ -20,7 +20,7 @@ npm install --save-dev eslint-plugin-codeanchor
 
 ```js
 // eslint.config.js
-import codeanchor from 'eslint-plugin-codeanchor'
+import codeanchor from '@farisabujolban/eslint-plugin-codeanchor'
 
 export default [
   codeanchor.configs.recommended,
@@ -31,7 +31,7 @@ Or enable rules individually:
 
 ```js
 // eslint.config.js
-import codeanchor from 'eslint-plugin-codeanchor'
+import codeanchor from '@farisabujolban/eslint-plugin-codeanchor'
 
 export default [
   {
@@ -51,8 +51,8 @@ export default [
 ```js
 // .eslintrc.js
 module.exports = {
-  plugins: ['codeanchor'],
-  extends: ['plugin:codeanchor/legacy'],
+  plugins: ['@farisabujolban/codeanchor'],
+  extends: ['plugin:@farisabujolban/codeanchor/legacy'],
 }
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-codeanchor",
+  "name": "@farisabujolban/eslint-plugin-codeanchor",
   "version": "0.1.0",
   "description": "ESLint plugin enforcing issue-linked TODOs, scoped temporary code, and declared environment variables",
   "type": "module",
