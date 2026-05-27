@@ -1,7 +1,7 @@
 import { todoRequiresIssue } from './rules/todo-requires-issue.js'
 import { tempCommentRequiresCondition } from './rules/temp-comment-requires-condition.js'
-import { noCommentedOutCode } from './rules/no-commented-out-code.js'
 import { envVarDeclared } from './rules/env-var-declared.js'
+import { commentExpiryDate } from './rules/comment-expiry-date.js'
 
 const plugin = {
   meta: {
@@ -11,8 +11,8 @@ const plugin = {
   rules: {
     'todo-requires-issue': todoRequiresIssue,
     'temp-comment-requires-condition': tempCommentRequiresCondition,
-    'no-commented-out-code': noCommentedOutCode,
     'env-var-declared': envVarDeclared,
+    'comment-expiry-date': commentExpiryDate,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -23,8 +23,8 @@ plugin.configs['recommended'] = {
   rules: {
     'codeanchor/todo-requires-issue': 'warn',
     'codeanchor/temp-comment-requires-condition': 'warn',
-    'codeanchor/no-commented-out-code': 'warn',
     'codeanchor/env-var-declared': 'error',
+    'codeanchor/comment-expiry-date': 'warn',
   },
 }
 
@@ -34,8 +34,8 @@ plugin.configs['legacy'] = {
   rules: {
     'codeanchor/todo-requires-issue': 'warn',
     'codeanchor/temp-comment-requires-condition': 'warn',
-    'codeanchor/no-commented-out-code': 'warn',
     'codeanchor/env-var-declared': 'error',
+    'codeanchor/comment-expiry-date': 'warn',
   },
 }
 
