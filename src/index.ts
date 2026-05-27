@@ -2,6 +2,11 @@ import { todoRequiresIssue } from './rules/todo-requires-issue.js'
 import { tempCommentRequiresCondition } from './rules/temp-comment-requires-condition.js'
 import { envVarDeclared } from './rules/env-var-declared.js'
 import { commentExpiryDate } from './rules/comment-expiry-date.js'
+import { noPlaceholderValues } from './rules/no-placeholder-values.js'
+import { noHardcodedCredentialAssignment } from './rules/no-hardcoded-credential-assignment.js'
+import { noHardcodedPort } from './rules/no-hardcoded-port.js'
+import { noSyncInAsync } from './rules/no-sync-in-async.js'
+import { noDoubleTypeAssertion } from './rules/no-double-type-assertion.js'
 
 const plugin = {
   meta: {
@@ -13,6 +18,11 @@ const plugin = {
     'temp-comment-requires-condition': tempCommentRequiresCondition,
     'env-var-declared': envVarDeclared,
     'comment-expiry-date': commentExpiryDate,
+    'no-placeholder-values': noPlaceholderValues,
+    'no-hardcoded-credential-assignment': noHardcodedCredentialAssignment,
+    'no-hardcoded-port': noHardcodedPort,
+    'no-sync-in-async': noSyncInAsync,
+    'no-double-type-assertion': noDoubleTypeAssertion,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -25,6 +35,11 @@ plugin.configs['recommended'] = {
     'codeanchor/temp-comment-requires-condition': 'warn',
     'codeanchor/env-var-declared': 'error',
     'codeanchor/comment-expiry-date': 'warn',
+    'codeanchor/no-placeholder-values': 'error',
+    'codeanchor/no-hardcoded-credential-assignment': 'error',
+    'codeanchor/no-hardcoded-port': 'warn',
+    'codeanchor/no-sync-in-async': 'warn',
+    'codeanchor/no-double-type-assertion': 'warn',
   },
 }
 
@@ -36,6 +51,11 @@ plugin.configs['legacy'] = {
     'codeanchor/temp-comment-requires-condition': 'warn',
     'codeanchor/env-var-declared': 'error',
     'codeanchor/comment-expiry-date': 'warn',
+    'codeanchor/no-placeholder-values': 'error',
+    'codeanchor/no-hardcoded-credential-assignment': 'error',
+    'codeanchor/no-hardcoded-port': 'warn',
+    'codeanchor/no-sync-in-async': 'warn',
+    'codeanchor/no-double-type-assertion': 'warn',
   },
 }
 

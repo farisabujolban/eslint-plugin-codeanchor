@@ -9,6 +9,7 @@ const DEFAULT_KEYWORDS = ['TODO', 'FIXME', 'HACK', 'TEMP', 'TEMPORARY', 'WORKARO
 
 // ISO date: YYYY-MM-DD
 const DATE_RE = /\b(\d{4}-\d{2}-\d{2})\b/g
+const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000
 
 function findExpiredDate(text: string): string | null {
   DATE_RE.lastIndex = 0
@@ -17,6 +18,17 @@ function findExpiredDate(text: string): string | null {
   while ((m = DATE_RE.exec(text)) !== null) {
     const ts = Date.parse(m[1])
     if (!isNaN(ts) && ts < now) return m[1]
+  }
+  return null
+}
+
+function findFarFutureDate(text: string): string | null {
+  DATE_RE.lastIndex = 0
+  let m: RegExpExecArray | null
+  const now = Date.now()
+  while ((m = DATE_RE.exec(text)) !== null) {
+    const ts = Date.parse(m[1])
+    if (!isNaN(ts) && ts > now + ONE_YEAR_MS) return m[1]
   }
   return null
 }
@@ -42,8 +54,8 @@ export const commentExpiryDate: Rule.RuleModule = {
       },
     ],
     messages: {
-      expiredDate:
-        '{{keyword}} comment has an expired date ({{date}}). Resolve or extend the deadline.',
+      expiredDate: '{{keyword}} comment has an expired date ({{date}}). Resolve or extend the deadline.',
+      farFutureDate: '{{keyword}} comment has a date more than 1 year away ({{date}}) — likely an AI-generated placeholder. Set a realistic deadline.',
     },
   },
 
@@ -58,6 +70,11 @@ export const commentExpiryDate: Rule.RuleModule = {
           const text = normalizeCommentText(comment.value)
           const keyword = extractKeyword(text, keywords)
           if (!keyword) continue
+          const farFutureDate = findFarFutureDate(text)
+          if (farFutureDate) {
+            context.report({ loc: comment.loc!, messageId: 'farFutureDate', data: { keyword, date: farFutureDate } })
+            continue
+          }
           const expiredDate = findExpiredDate(text)
           if (!expiredDate) continue
           context.report({

@@ -14,20 +14,27 @@ const tester = new RuleTester({
 
 tester.run('comment-expiry-date', commentExpiryDate, {
   valid: [
-    { code: '// TODO: revisit this by 2999-01-01' },
     { code: '// TODO: revisit this when the API stabilizes' },
     { code: '// NOTE: historical date 2000-01-01 is okay without a configured keyword' },
-    { code: '/* WORKAROUND: remove after 2999-01-01 */' },
     {
       code: '// TODO: past date is ignored when TODO is not configured 2000-01-01',
       options: [{ keywords: ['FIXME'] }],
     },
+  ],
+  invalid: [
+    {
+      code: '// TODO: revisit this by 2999-01-01',
+      errors: [{ messageId: 'farFutureDate' }],
+    },
+    {
+      code: '/* WORKAROUND: remove after 2999-01-01 */',
+      errors: [{ messageId: 'farFutureDate' }],
+    },
     {
       code: '// CLEANUP: remove after 2999-01-01',
       options: [{ keywords: ['CLEANUP'] }],
+      errors: [{ messageId: 'farFutureDate' }],
     },
-  ],
-  invalid: [
     {
       code: '// TODO: remove after 2000-01-01',
       errors: [{ messageId: 'expiredDate' }],
