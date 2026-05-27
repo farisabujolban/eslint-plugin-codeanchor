@@ -1,15 +1,15 @@
-# eslint-plugin-repo-drift
+# eslint-plugin-codeanchor
 
 ESLint plugin enforcing source-level maintainability conventions that standard linting tools don't cover: issue-linked TODOs, scoped temporary code, commented-out code detection, and declared environment variables.
 
-Companion to [`repo-drift`](https://github.com/your-org/repo-drift) CLI — the CLI handles git-aware cross-file checks; this plugin handles AST-level single-file checks.
+Companion to [`codeanchor`](https://github.com/your-org/codeanchor) CLI — the CLI handles git-aware cross-file checks; this plugin handles AST-level single-file checks.
 
 ---
 
 ## Installation
 
 ```bash
-npm install --save-dev eslint-plugin-repo-drift
+npm install --save-dev eslint-plugin-codeanchor
 ```
 
 ---
@@ -20,10 +20,10 @@ npm install --save-dev eslint-plugin-repo-drift
 
 ```js
 // eslint.config.js
-import repoDrift from 'eslint-plugin-repo-drift'
+import codeanchor from 'eslint-plugin-codeanchor'
 
 export default [
-  repoDrift.configs.recommended,
+  codeanchor.configs.recommended,
 ]
 ```
 
@@ -31,16 +31,16 @@ Or enable rules individually:
 
 ```js
 // eslint.config.js
-import repoDrift from 'eslint-plugin-repo-drift'
+import codeanchor from 'eslint-plugin-codeanchor'
 
 export default [
   {
-    plugins: { 'repo-drift': repoDrift },
+    plugins: { 'codeanchor': codeanchor },
     rules: {
-      'repo-drift/todo-requires-issue': 'warn',
-      'repo-drift/temp-comment-requires-condition': 'warn',
-      'repo-drift/no-commented-out-code': 'warn',
-      'repo-drift/env-var-declared': 'error',
+      'codeanchor/todo-requires-issue': 'warn',
+      'codeanchor/temp-comment-requires-condition': 'warn',
+      'codeanchor/no-commented-out-code': 'warn',
+      'codeanchor/env-var-declared': 'error',
     },
   },
 ]
@@ -51,8 +51,8 @@ export default [
 ```js
 // .eslintrc.js
 module.exports = {
-  plugins: ['repo-drift'],
-  extends: ['plugin:repo-drift/legacy'],
+  plugins: ['codeanchor'],
+  extends: ['plugin:codeanchor/legacy'],
 }
 ```
 
@@ -62,16 +62,16 @@ module.exports = {
 
 | Rule | Description | Default | Fixable |
 |---|---|---|---|
-| `repo-drift/todo-requires-issue` | TODO/FIXME/HACK must include an issue reference | warn | No |
-| `repo-drift/temp-comment-requires-condition` | Temporary/workaround comments must specify a removal condition | warn | No |
-| `repo-drift/no-commented-out-code` | Warn on comment blocks that look like commented-out code | warn | No |
-| `repo-drift/env-var-declared` | `process.env.X` / `import.meta.env.X` must be declared in `.env.example` | error | No |
+| `codeanchor/todo-requires-issue` | TODO/FIXME/HACK must include an issue reference | warn | No |
+| `codeanchor/temp-comment-requires-condition` | Temporary/workaround comments must specify a removal condition | warn | No |
+| `codeanchor/no-commented-out-code` | Warn on comment blocks that look like commented-out code | warn | No |
+| `codeanchor/env-var-declared` | `process.env.X` / `import.meta.env.X` must be declared in `.env.example` | error | No |
 
 ---
 
 ## Rule docs
 
-### `repo-drift/todo-requires-issue`
+### `codeanchor/todo-requires-issue`
 
 Flags `TODO`, `FIXME`, and `HACK` comments that don't include a trackable reference.
 
@@ -92,7 +92,7 @@ Flags `TODO`, `FIXME`, and `HACK` comments that don't include a trackable refere
 
 ```json
 {
-  "repo-drift/todo-requires-issue": ["warn", {
+  "codeanchor/todo-requires-issue": ["warn", {
     "tags": ["TODO", "FIXME", "HACK"],
     "pattern": "#\\d+|https://"
   }]
@@ -106,7 +106,7 @@ Flags `TODO`, `FIXME`, and `HACK` comments that don't include a trackable refere
 
 ---
 
-### `repo-drift/temp-comment-requires-condition`
+### `codeanchor/temp-comment-requires-condition`
 
 Flags temporary/workaround comments that don't say when they should be removed.
 
@@ -127,7 +127,7 @@ Flags temporary/workaround comments that don't say when they should be removed.
 
 ```json
 {
-  "repo-drift/temp-comment-requires-condition": ["warn", {
+  "codeanchor/temp-comment-requires-condition": ["warn", {
     "keywords": ["TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"],
     "requireIssue": false
   }]
@@ -141,7 +141,7 @@ Flags temporary/workaround comments that don't say when they should be removed.
 
 ---
 
-### `repo-drift/no-commented-out-code`
+### `codeanchor/no-commented-out-code`
 
 Warns when a comment block contains likely commented-out code. Uses heuristics (import statements, `const`/`let`/`return` at line start, arrow functions, method calls, assignments).
 
@@ -159,7 +159,7 @@ Warns when a comment block contains likely commented-out code. Uses heuristics (
 To suppress a specific block use ESLint's standard inline disable:
 
 ```js
-// eslint-disable-next-line repo-drift/no-commented-out-code
+// eslint-disable-next-line codeanchor/no-commented-out-code
 // const legacyPath = require('./old-module')
 ```
 
@@ -167,7 +167,7 @@ To suppress a specific block use ESLint's standard inline disable:
 
 ```json
 {
-  "repo-drift/no-commented-out-code": ["warn", {
+  "codeanchor/no-commented-out-code": ["warn", {
     "threshold": 0.5
   }]
 }
@@ -179,7 +179,7 @@ To suppress a specific block use ESLint's standard inline disable:
 
 ---
 
-### `repo-drift/env-var-declared`
+### `codeanchor/env-var-declared`
 
 Every `process.env.FOO` or `import.meta.env.FOO` access must have `FOO` declared in `.env.example` or `.env.sample`. This makes the implicit contract explicit and prevents "works on my machine" bugs.
 
@@ -200,7 +200,7 @@ const key = import.meta.env.API_KEY    // not in .env.example
 
 ```json
 {
-  "repo-drift/env-var-declared": ["error", {
+  "codeanchor/env-var-declared": ["error", {
     "envFiles": [".env.example", ".env.sample"],
     "allowDynamic": false
   }]
@@ -218,7 +218,7 @@ The plugin walks up the directory tree from the linted file to find the project 
 
 ## Companion tool
 
-[`repo-drift`](https://github.com/your-org/repo-drift) — CLI for git-aware, cross-file drift checks: stale ownership, dead approval requirements, and workflow decay. Complements this plugin — run both for full coverage.
+[`codeanchor`](https://github.com/your-org/codeanchor) — CLI for git-aware, cross-file drift checks: stale ownership, dead approval requirements, and workflow decay. Complements this plugin — run both for full coverage.
 
 ---
 
