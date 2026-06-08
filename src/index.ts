@@ -12,6 +12,7 @@ import { requireErrorCause } from './rules/require-error-cause.js'
 import { noObjectSpreadAccumulator } from './rules/no-object-spread-accumulator.js'
 import { noPromiseConstructorWrap } from './rules/no-promise-constructor-wrap.js'
 import { noConstructorSideEffect } from './rules/no-constructor-side-effect.js'
+import { noInsecureRandomForSecret } from './rules/no-insecure-random-for-secret.js'
 
 const plugin = {
   meta: {
@@ -33,6 +34,7 @@ const plugin = {
     'no-object-spread-accumulator': noObjectSpreadAccumulator,
     'no-promise-constructor-wrap': noPromiseConstructorWrap,
     'no-constructor-side-effect': noConstructorSideEffect,
+    'no-insecure-random-for-secret': noInsecureRandomForSecret,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -55,6 +57,7 @@ plugin.configs['recommended'] = {
     'codeanchor/no-object-spread-accumulator': 'warn',
     'codeanchor/no-promise-constructor-wrap': 'error',
     'codeanchor/no-constructor-side-effect': 'warn',
+    'codeanchor/no-insecure-random-for-secret': 'error',
   },
 }
 
@@ -76,6 +79,7 @@ plugin.configs['legacy'] = {
     'codeanchor/no-object-spread-accumulator': 'warn',
     'codeanchor/no-promise-constructor-wrap': 'error',
     'codeanchor/no-constructor-side-effect': 'warn',
+    'codeanchor/no-insecure-random-for-secret': 'error',
   },
 }
 
