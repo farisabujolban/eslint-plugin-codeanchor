@@ -13,6 +13,7 @@ import { noObjectSpreadAccumulator } from './rules/no-object-spread-accumulator.
 import { noPromiseConstructorWrap } from './rules/no-promise-constructor-wrap.js'
 import { noConstructorSideEffect } from './rules/no-constructor-side-effect.js'
 import { noInsecureRandomForSecret } from './rules/no-insecure-random-for-secret.js'
+import { noUnguardedUrlConstructor } from './rules/no-unguarded-url-constructor.js'
 
 const plugin = {
   meta: {
@@ -35,6 +36,7 @@ const plugin = {
     'no-promise-constructor-wrap': noPromiseConstructorWrap,
     'no-constructor-side-effect': noConstructorSideEffect,
     'no-insecure-random-for-secret': noInsecureRandomForSecret,
+    'no-unguarded-url-constructor': noUnguardedUrlConstructor,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -58,6 +60,7 @@ plugin.configs['recommended'] = {
     'codeanchor/no-promise-constructor-wrap': 'error',
     'codeanchor/no-constructor-side-effect': 'warn',
     'codeanchor/no-insecure-random-for-secret': 'error',
+    'codeanchor/no-unguarded-url-constructor': 'warn',
   },
 }
 
@@ -80,6 +83,7 @@ plugin.configs['legacy'] = {
     'codeanchor/no-promise-constructor-wrap': 'error',
     'codeanchor/no-constructor-side-effect': 'warn',
     'codeanchor/no-insecure-random-for-secret': 'error',
+    'codeanchor/no-unguarded-url-constructor': 'warn',
   },
 }
 
