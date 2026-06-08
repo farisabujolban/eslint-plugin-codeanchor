@@ -10,6 +10,7 @@ import { noDoubleTypeAssertion } from './rules/no-double-type-assertion.js'
 import { noUnguardedJsonParse } from './rules/no-unguarded-json-parse.js'
 import { requireErrorCause } from './rules/require-error-cause.js'
 import { noObjectSpreadAccumulator } from './rules/no-object-spread-accumulator.js'
+import { noPromiseConstructorWrap } from './rules/no-promise-constructor-wrap.js'
 
 const plugin = {
   meta: {
@@ -29,6 +30,7 @@ const plugin = {
     'no-unguarded-json-parse': noUnguardedJsonParse,
     'require-error-cause': requireErrorCause,
     'no-object-spread-accumulator': noObjectSpreadAccumulator,
+    'no-promise-constructor-wrap': noPromiseConstructorWrap,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -49,6 +51,7 @@ plugin.configs['recommended'] = {
     'codeanchor/no-unguarded-json-parse': 'warn',
     'codeanchor/require-error-cause': 'warn',
     'codeanchor/no-object-spread-accumulator': 'warn',
+    'codeanchor/no-promise-constructor-wrap': 'error',
   },
 }
 
@@ -68,6 +71,7 @@ plugin.configs['legacy'] = {
     'codeanchor/no-unguarded-json-parse': 'warn',
     'codeanchor/require-error-cause': 'warn',
     'codeanchor/no-object-spread-accumulator': 'warn',
+    'codeanchor/no-promise-constructor-wrap': 'error',
   },
 }
 
