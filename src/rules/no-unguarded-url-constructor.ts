@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type { NewExpression, Node } from 'estree'
 
 function isNewUrl(node: NewExpression): boolean {
@@ -12,12 +13,13 @@ function isInsideTry(ancestors: Node[]): boolean {
   return false
 }
 
-export const noUnguardedUrlConstructor: Rule.RuleModule = {
+export const noUnguardedUrlConstructor: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Require new URL() to be wrapped in a try/catch block.',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {

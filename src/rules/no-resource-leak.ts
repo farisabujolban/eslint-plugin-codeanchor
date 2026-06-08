@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type { Node, VariableDeclarator, CallExpression, NewExpression, Identifier, MemberExpression } from 'estree'
 
 // resource-creating call patterns: object.method or new Constructor
@@ -42,7 +43,7 @@ function isResourceCreatorCall(node: CallExpression | NewExpression): string | n
   return null
 }
 
-export const noResourceLeak: Rule.RuleModule = {
+export const noResourceLeak: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -50,6 +51,7 @@ export const noResourceLeak: Rule.RuleModule = {
         'Require resources (streams, servers, workers, sockets) to be explicitly closed or destroyed ' +
         'in the same function they are created (ISO 5055 Reliability, CWE-772).',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {

@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import { normalizeCommentText, extractKeyword, hasIssueReference } from '../util/comment-text.js'
 
 interface Options {
@@ -11,13 +12,14 @@ const DEFAULT_KEYWORDS = ['TEMP', 'TEMPORARY', 'WORKAROUND', 'WIP', 'REMOVE']
 // Phrases that count as a removal condition when requireIssue is false
 const CONDITION_RE = /remove\s+when|remove\s+after|delete\s+after|once\s+\w|after\s+v\d|20\d{2}-\d{2}/i
 
-export const tempCommentRequiresCondition: Rule.RuleModule = {
+export const tempCommentRequiresCondition: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description:
         'Require temporary/workaround comments to include an issue reference or removal condition',
       recommended: true,
+      languages: ['*'],
     },
     schema: [
       {

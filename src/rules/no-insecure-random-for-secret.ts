@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 
 const CREDENTIAL_RE =
   /^(password|passwd|secret|api[_-]?key|apikey|token|auth[_-]?token|private[_-]?key|access[_-]?key|client[_-]?secret|db[_-]?pass(word)?|database[_-]?pass(word)?|nonce|salt|csrf|session[_-]?id|session[_-]?token)$/i
@@ -29,12 +30,13 @@ function containsMathRandom(node: unknown): boolean {
   return false
 }
 
-export const noInsecureRandomForSecret: Rule.RuleModule = {
+export const noInsecureRandomForSecret: CodeAnchorRule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Disallow Math.random() for generating security-sensitive values like tokens or secrets',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {

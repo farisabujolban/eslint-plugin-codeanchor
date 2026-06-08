@@ -1,15 +1,17 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type {
   NewExpression, ArrowFunctionExpression, FunctionExpression,
   BlockStatement, ExpressionStatement, CallExpression, Identifier,
 } from 'estree'
 
-export const noPromiseConstructorWrap: Rule.RuleModule = {
+export const noPromiseConstructorWrap: CodeAnchorRule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Disallow wrapping a Promise-returning function call in new Promise() — the outer wrapper is redundant and may swallow rejections.',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {

@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type { MemberExpression, Identifier, Literal, MetaProperty } from 'estree'
 import { loadEnvKeys } from '../util/env-file.js'
 
@@ -7,13 +8,14 @@ interface Options {
   allowDynamic?: boolean
 }
 
-export const envVarDeclared: Rule.RuleModule = {
+export const envVarDeclared: CodeAnchorRule = {
   meta: {
     type: 'problem',
     docs: {
       description:
         'Require process.env.X and import.meta.env.X accesses to be declared in .env.example or .env.sample',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [
       {

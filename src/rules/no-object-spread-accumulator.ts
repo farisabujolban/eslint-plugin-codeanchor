@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type {
   CallExpression, MemberExpression, ArrowFunctionExpression,
   FunctionExpression, ObjectExpression, SpreadElement, Identifier,
@@ -42,12 +43,13 @@ function findSpreadNode(
   return null
 }
 
-export const noObjectSpreadAccumulator: Rule.RuleModule = {
+export const noObjectSpreadAccumulator: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Disallow object spread of the accumulator inside .reduce() — creates an O(n²) object allocation pattern.',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {

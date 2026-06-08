@@ -1,11 +1,13 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 
-export const noHardcodedPort: Rule.RuleModule = {
+export const noHardcodedPort: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Flag hardcoded port numbers in server listen calls',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [
       {

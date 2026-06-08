@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import { normalizeCommentText, extractKeyword } from '../util/comment-text.js'
 
 interface Options {
@@ -33,12 +34,13 @@ function findFarFutureDate(text: string): string | null {
   return null
 }
 
-export const commentExpiryDate: Rule.RuleModule = {
+export const commentExpiryDate: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Flag TODO/TEMP/WORKAROUND comments that contain a past expiry date',
       recommended: true,
+      languages: ['*'],
     },
     schema: [
       {

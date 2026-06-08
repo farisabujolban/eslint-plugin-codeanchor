@@ -1,13 +1,15 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 
 const SYNC_RE = /Sync$/
 
-export const noSyncInAsync: Rule.RuleModule = {
+export const noSyncInAsync: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Flag synchronous *Sync method calls inside async functions',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {

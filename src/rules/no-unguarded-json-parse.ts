@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type { CallExpression, MemberExpression, Node } from 'estree'
 
 function isJsonParse(node: CallExpression): boolean {
@@ -19,10 +20,10 @@ function isInsideTry(node: Node, ancestors: Node[]): boolean {
   return false
 }
 
-export const noUnguardedJsonParse: Rule.RuleModule = {
+export const noUnguardedJsonParse: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
-    docs: { description: 'Require JSON.parse() to be wrapped in a try/catch block.', recommended: true },
+    docs: { description: 'Require JSON.parse() to be wrapped in a try/catch block.', recommended: true, languages: ['javascript', 'typescript'] },
     schema: [],
     messages: {
       missingTryCatch: 'JSON.parse() can throw SyntaxError — wrap it in try/catch.',

@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import { normalizeCommentText, extractKeyword, hasIssueReference } from '../util/comment-text.js'
 
 interface Options {
@@ -8,12 +9,13 @@ interface Options {
 
 const DEFAULT_TAGS = ['TODO', 'FIXME', 'HACK']
 
-export const todoRequiresIssue: Rule.RuleModule = {
+export const todoRequiresIssue: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Require TODO/FIXME/HACK comments to include an issue reference',
       recommended: true,
+      languages: ['*'],
     },
     schema: [
       {

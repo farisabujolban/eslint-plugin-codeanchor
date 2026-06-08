@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type { CatchClause, ThrowStatement, NewExpression, ObjectExpression, Identifier, Property } from 'estree'
 
 const ERROR_CTORS = new Set(['Error', 'TypeError', 'RangeError', 'ReferenceError', 'SyntaxError', 'URIError', 'EvalError'])
@@ -14,12 +15,13 @@ function hasCauseProp(opts: ObjectExpression): boolean {
   })
 }
 
-export const requireErrorCause: Rule.RuleModule = {
+export const requireErrorCause: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Require throw new Error() inside catch blocks to pass { cause: err } so the original error is not silently dropped.',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {
