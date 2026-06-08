@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 import type { CallExpression, MemberExpression, Identifier } from 'estree'
 
 // Bare global calls that are side effects
@@ -48,12 +49,13 @@ function detectSideEffect(node: CallExpression): string | null {
   return null
 }
 
-export const noConstructorSideEffect: Rule.RuleModule = {
+export const noConstructorSideEffect: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Disallow side effects (network calls, file I/O, timers, event listeners) directly in class constructors — they make classes untestable and can cause memory leaks.',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {
@@ -62,28 +64,35 @@ export const noConstructorSideEffect: Rule.RuleModule = {
   },
 
   create(context) {
-    // 0 = not in constructor; 1 = inside constructor's own function body; 2+ = nested function
-    let constructorDepth = 0
+    // Each entry in the stack tracks the nested-function depth for ONE constructor.
+    // Depth 1 = constructor MethodDefinition entered but body not yet entered.
+    // Depth 2 = inside the constructor's own function body (flag side effects here).
+    // Depth 3+ = inside a nested function within the constructor (deferred — skip).
+    const constructorStack: number[] = []
 
     return {
       'MethodDefinition[kind="constructor"]'() {
-        constructorDepth = 1
+        constructorStack.push(1)
       },
       'MethodDefinition[kind="constructor"]:exit'() {
-        constructorDepth = 0
+        constructorStack.pop()
       },
 
       // Track nested functions so we don't flag deferred side effects
       ':function'() {
-        if (constructorDepth > 0) constructorDepth++
+        if (constructorStack.length > 0) {
+          constructorStack[constructorStack.length - 1]++
+        }
       },
       ':function:exit'() {
-        if (constructorDepth > 1) constructorDepth--
+        if (constructorStack.length > 0 && constructorStack[constructorStack.length - 1] > 1) {
+          constructorStack[constructorStack.length - 1]--
+        }
       },
 
       CallExpression(node: CallExpression) {
-        // Only flag calls directly in the constructor body (depth 2 = constructor's own FunctionExpression)
-        if (constructorDepth !== 2) return
+        // Only flag calls directly in the constructor body (depth 2 in the innermost frame)
+        if (constructorStack.length === 0 || constructorStack[constructorStack.length - 1] !== 2) return
         const callName = detectSideEffect(node)
         if (callName) context.report({ node, messageId: 'constructorSideEffect', data: { callName } })
       },
