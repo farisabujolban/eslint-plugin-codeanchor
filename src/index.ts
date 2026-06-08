@@ -14,6 +14,7 @@ import { noPromiseConstructorWrap } from './rules/no-promise-constructor-wrap.js
 import { noConstructorSideEffect } from './rules/no-constructor-side-effect.js'
 import { noInsecureRandomForSecret } from './rules/no-insecure-random-for-secret.js'
 import { noUnguardedUrlConstructor } from './rules/no-unguarded-url-constructor.js'
+import { noHardcodedConnectionString } from './rules/no-hardcoded-connection-string.js'
 
 const plugin = {
   meta: {
@@ -37,6 +38,7 @@ const plugin = {
     'no-constructor-side-effect': noConstructorSideEffect,
     'no-insecure-random-for-secret': noInsecureRandomForSecret,
     'no-unguarded-url-constructor': noUnguardedUrlConstructor,
+    'no-hardcoded-connection-string': noHardcodedConnectionString,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -61,6 +63,7 @@ plugin.configs['recommended'] = {
     'codeanchor/no-constructor-side-effect': 'warn',
     'codeanchor/no-insecure-random-for-secret': 'error',
     'codeanchor/no-unguarded-url-constructor': 'warn',
+    'codeanchor/no-hardcoded-connection-string': 'error',
   },
 }
 
@@ -84,6 +87,7 @@ plugin.configs['legacy'] = {
     'codeanchor/no-constructor-side-effect': 'warn',
     'codeanchor/no-insecure-random-for-secret': 'error',
     'codeanchor/no-unguarded-url-constructor': 'warn',
+    'codeanchor/no-hardcoded-connection-string': 'error',
   },
 }
 
