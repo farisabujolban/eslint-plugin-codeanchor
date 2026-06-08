@@ -11,6 +11,7 @@ import { noUnguardedJsonParse } from './rules/no-unguarded-json-parse.js'
 import { requireErrorCause } from './rules/require-error-cause.js'
 import { noObjectSpreadAccumulator } from './rules/no-object-spread-accumulator.js'
 import { noPromiseConstructorWrap } from './rules/no-promise-constructor-wrap.js'
+import { noConstructorSideEffect } from './rules/no-constructor-side-effect.js'
 
 const plugin = {
   meta: {
@@ -31,6 +32,7 @@ const plugin = {
     'require-error-cause': requireErrorCause,
     'no-object-spread-accumulator': noObjectSpreadAccumulator,
     'no-promise-constructor-wrap': noPromiseConstructorWrap,
+    'no-constructor-side-effect': noConstructorSideEffect,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -52,6 +54,7 @@ plugin.configs['recommended'] = {
     'codeanchor/require-error-cause': 'warn',
     'codeanchor/no-object-spread-accumulator': 'warn',
     'codeanchor/no-promise-constructor-wrap': 'error',
+    'codeanchor/no-constructor-side-effect': 'warn',
   },
 }
 
@@ -72,6 +75,7 @@ plugin.configs['legacy'] = {
     'codeanchor/require-error-cause': 'warn',
     'codeanchor/no-object-spread-accumulator': 'warn',
     'codeanchor/no-promise-constructor-wrap': 'error',
+    'codeanchor/no-constructor-side-effect': 'warn',
   },
 }
 
