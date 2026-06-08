@@ -7,6 +7,7 @@ import { noHardcodedCredentialAssignment } from './rules/no-hardcoded-credential
 import { noHardcodedPort } from './rules/no-hardcoded-port.js'
 import { noSyncInAsync } from './rules/no-sync-in-async.js'
 import { noDoubleTypeAssertion } from './rules/no-double-type-assertion.js'
+import { noUnguardedJsonParse } from './rules/no-unguarded-json-parse.js'
 
 const plugin = {
   meta: {
@@ -23,6 +24,7 @@ const plugin = {
     'no-hardcoded-port': noHardcodedPort,
     'no-sync-in-async': noSyncInAsync,
     'no-double-type-assertion': noDoubleTypeAssertion,
+    'no-unguarded-json-parse': noUnguardedJsonParse,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -40,6 +42,7 @@ plugin.configs['recommended'] = {
     'codeanchor/no-hardcoded-port': 'warn',
     'codeanchor/no-sync-in-async': 'warn',
     'codeanchor/no-double-type-assertion': 'warn',
+    'codeanchor/no-unguarded-json-parse': 'warn',
   },
 }
 
@@ -56,6 +59,7 @@ plugin.configs['legacy'] = {
     'codeanchor/no-hardcoded-port': 'warn',
     'codeanchor/no-sync-in-async': 'warn',
     'codeanchor/no-double-type-assertion': 'warn',
+    'codeanchor/no-unguarded-json-parse': 'warn',
   },
 }
 
