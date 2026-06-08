@@ -15,6 +15,7 @@ import { noConstructorSideEffect } from './rules/no-constructor-side-effect.js'
 import { noInsecureRandomForSecret } from './rules/no-insecure-random-for-secret.js'
 import { noUnguardedUrlConstructor } from './rules/no-unguarded-url-constructor.js'
 import { noHardcodedConnectionString } from './rules/no-hardcoded-connection-string.js'
+import { noResourceLeak } from './rules/no-resource-leak.js'
 
 const plugin = {
   meta: {
@@ -39,6 +40,7 @@ const plugin = {
     'no-insecure-random-for-secret': noInsecureRandomForSecret,
     'no-unguarded-url-constructor': noUnguardedUrlConstructor,
     'no-hardcoded-connection-string': noHardcodedConnectionString,
+    'no-resource-leak': noResourceLeak,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -64,6 +66,7 @@ plugin.configs['recommended'] = {
     'codeanchor/no-insecure-random-for-secret': 'error',
     'codeanchor/no-unguarded-url-constructor': 'warn',
     'codeanchor/no-hardcoded-connection-string': 'error',
+    'codeanchor/no-resource-leak': 'warn',
   },
 }
 
@@ -88,6 +91,7 @@ plugin.configs['legacy'] = {
     'codeanchor/no-insecure-random-for-secret': 'error',
     'codeanchor/no-unguarded-url-constructor': 'warn',
     'codeanchor/no-hardcoded-connection-string': 'error',
+    'codeanchor/no-resource-leak': 'warn',
   },
 }
 
