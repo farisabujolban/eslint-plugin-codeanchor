@@ -1,4 +1,6 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
+import { isTestFile } from '../util/test-file.js'
 
 const CREDENTIAL_RE = /^(password|passwd|secret|api[_-]?key|apikey|token|auth[_-]?token|private[_-]?key|access[_-]?key|client[_-]?secret|db[_-]?pass(word)?|database[_-]?pass(word)?)$/i
 
@@ -11,16 +13,13 @@ function isNonEmptyStringLiteral(node: unknown): boolean {
   return n?.type === 'Literal' && typeof n.value === 'string' && (n.value as string).length > 0
 }
 
-function isTestFile(filename: string): boolean {
-  return /[./](test|spec)\.[jt]sx?$|[/\\]__tests__[/\\]|[/\\](test|tests|spec|specs)[/\\]/i.test(filename)
-}
-
-export const noHardcodedCredentialAssignment: Rule.RuleModule = {
+export const noHardcodedCredentialAssignment: CodeAnchorRule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Flag hardcoded string values assigned to credential-named variables',
       recommended: true,
+      languages: ['javascript', 'typescript'],
     },
     schema: [],
     messages: {

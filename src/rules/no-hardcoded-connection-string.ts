@@ -1,19 +1,18 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
+import { isTestFile } from '../util/test-file.js'
 
 // Matches protocol://user:pass@host — the user:pass@ segment proves credentials are embedded
 const CONNECTION_STRING_RE =
   /^(mongodb(\+srv)?|postgresql|postgres|mysql|mariadb|mssql|redis(\+tls)?|amqps?|nats|rabbitmq):\/\/[^:@\s/]+:[^@\s]+@/i
 
-function isTestFile(filename: string): boolean {
-  return /[./](test|spec)\.[jt]sx?$|[/\\]__tests__[/\\]|[/\\](test|tests|spec|specs)[/\\]/i.test(filename)
-}
-
-export const noHardcodedConnectionString: Rule.RuleModule = {
+export const noHardcodedConnectionString: CodeAnchorRule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Disallow hardcoded connection strings with embedded credentials',
       recommended: true,
+      languages: ['*'],
     },
     schema: [],
     messages: {

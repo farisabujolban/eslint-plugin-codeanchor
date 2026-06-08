@@ -1,4 +1,6 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
+import { isTestFile } from '../util/test-file.js'
 
 const DEFAULT_PATTERNS: RegExp[] = [
   /^your[_\-\s]?api[_\-\s]?key/i,
@@ -15,16 +17,13 @@ const DEFAULT_PATTERNS: RegExp[] = [
   /^example\.com$/i,
 ]
 
-function isTestFile(filename: string): boolean {
-  return /[./](test|spec)\.[jt]sx?$|[/\\]__tests__[/\\]|[/\\](test|tests|spec|specs)[/\\]/i.test(filename)
-}
-
-export const noPlaceholderValues: Rule.RuleModule = {
+export const noPlaceholderValues: CodeAnchorRule = {
   meta: {
     type: 'problem',
     docs: {
       description: 'Flag placeholder string values left by AI code generation',
       recommended: true,
+      languages: ['*'],
     },
     schema: [
       {
