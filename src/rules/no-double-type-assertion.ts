@@ -1,11 +1,13 @@
 import type { Rule } from 'eslint'
+import type { CodeAnchorRule } from '../types.js'
 
-export const noDoubleTypeAssertion: Rule.RuleModule = {
+export const noDoubleTypeAssertion: CodeAnchorRule = {
   meta: {
     type: 'suggestion',
     docs: {
       description: 'Flag "as unknown as T" double type assertions that bypass TypeScript\'s type checker',
       recommended: true,
+      languages: ['typescript'],
     },
     schema: [],
     messages: {
@@ -25,7 +27,7 @@ export const noDoubleTypeAssertion: Rule.RuleModule = {
           n.expression.type === 'TSAsExpression' &&
           n.expression.typeAnnotation?.type === 'TSUnknownKeyword'
         ) {
-          const outerType = context.getSourceCode().getText(n.typeAnnotation as Rule.Node)
+          const outerType = context.sourceCode.getText(n.typeAnnotation as Rule.Node)
           context.report({ node, messageId: 'doubleAssertion', data: { type: outerType } })
         }
       },
