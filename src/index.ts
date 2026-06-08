@@ -8,6 +8,7 @@ import { noHardcodedPort } from './rules/no-hardcoded-port.js'
 import { noSyncInAsync } from './rules/no-sync-in-async.js'
 import { noDoubleTypeAssertion } from './rules/no-double-type-assertion.js'
 import { noUnguardedJsonParse } from './rules/no-unguarded-json-parse.js'
+import { requireErrorCause } from './rules/require-error-cause.js'
 
 const plugin = {
   meta: {
@@ -25,6 +26,7 @@ const plugin = {
     'no-sync-in-async': noSyncInAsync,
     'no-double-type-assertion': noDoubleTypeAssertion,
     'no-unguarded-json-parse': noUnguardedJsonParse,
+    'require-error-cause': requireErrorCause,
   },
   configs: {} as Record<string, unknown>,
 }
@@ -43,6 +45,7 @@ plugin.configs['recommended'] = {
     'codeanchor/no-sync-in-async': 'warn',
     'codeanchor/no-double-type-assertion': 'warn',
     'codeanchor/no-unguarded-json-parse': 'warn',
+    'codeanchor/require-error-cause': 'warn',
   },
 }
 
@@ -60,6 +63,7 @@ plugin.configs['legacy'] = {
     'codeanchor/no-sync-in-async': 'warn',
     'codeanchor/no-double-type-assertion': 'warn',
     'codeanchor/no-unguarded-json-parse': 'warn',
+    'codeanchor/require-error-cause': 'warn',
   },
 }
 
