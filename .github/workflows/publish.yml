@@ -20,7 +20,7 @@ jobs:
                   cache: npm
                   registry-url: https://registry.npmjs.org
 
-            - uses: dopplerhq/secrets-fetch-action@v1.3.0
+            - uses: dopplerhq/secrets-fetch-action@v2.0.0
               with:
                   doppler-token: ${{ secrets.DOPPLER_TOKEN }}
                   inject-env-vars: true
