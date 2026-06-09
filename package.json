@@ -1,47 +1,58 @@
 {
-  "name": "@farisabujolban/eslint-plugin-codeanchor",
-  "version": "0.1.0",
-  "description": "ESLint plugin enforcing issue-linked TODOs, scoped temporary code, and declared environment variables",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+    "name": "@farisabujolban/eslint-plugin-codeanchor",
+    "version": "0.1.0",
+    "description": "ESLint plugin enforcing issue-linked TODOs, scoped temporary code, and declared environment variables",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "lint": "tsc && eslint . --max-warnings=0",
+        "lint:fix": "tsc && eslint . --fix --max-warnings=0",
+        "fmt": "prettier --write .",
+        "fmt:check": "prettier --check .",
+        "tc": "tsc --noEmit",
+        "prepare": "husky",
+        "prepublishOnly": "npm run build"
+    },
+    "files": [
+        "dist"
+    ],
+    "keywords": [
+        "eslint",
+        "eslint-plugin",
+        "lint",
+        "todo",
+        "env",
+        "drift",
+        "maintainability"
+    ],
+    "engines": {
+        "node": ">=18"
+    },
+    "peerDependencies": {
+        "eslint": ">=8.0.0"
+    },
+    "devDependencies": {
+        "@farisabujolban/eslint-plugin-codeanchor": "file:.",
+        "@typescript-eslint/parser": "^8.0.0",
+        "@typescript-eslint/rule-tester": "^8.0.0",
+        "@types/node": "^20.0.0",
+        "eslint": "^9.0.0",
+        "husky": "^9.0.0",
+        "lint-staged": "^15.0.0",
+        "prettier": "^3.0.0",
+        "typescript": "^5.4.0",
+        "typescript-eslint": "^8.0.0",
+        "vitest": "^1.6.0"
     }
-  },
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "prepublishOnly": "npm run build"
-  },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "eslint",
-    "eslint-plugin",
-    "lint",
-    "todo",
-    "env",
-    "drift",
-    "maintainability"
-  ],
-  "engines": {
-    "node": ">=18"
-  },
-  "peerDependencies": {
-    "eslint": ">=8.0.0"
-  },
-  "devDependencies": {
-    "@typescript-eslint/parser": "^8.0.0",
-    "@typescript-eslint/rule-tester": "^8.0.0",
-    "@types/node": "^20.0.0",
-    "eslint": "^9.0.0",
-    "typescript": "^5.4.0",
-    "vitest": "^1.6.0"
-  }
 }

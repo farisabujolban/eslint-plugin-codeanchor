@@ -7,32 +7,34 @@ function isCredentialName(name: string): boolean {
     return CREDENTIAL_RE.test(name);
 }
 
-function containsMathRandom(node: unknown): boolean {
-    if (!node || typeof node !== 'object') return false;
-    const n = node as Record<string, unknown>;
-    if (n.type === 'CallExpression') {
-        const callee = n.callee as Record<string, unknown> | undefined;
-        if (
-            callee?.type === 'MemberExpression' &&
-            !(callee.computed as boolean) &&
-            (callee.object as Record<string, unknown>)?.type === 'Identifier' &&
-            (callee.object as Record<string, unknown>).name === 'Math' &&
-            (callee.property as Record<string, unknown>)?.type === 'Identifier' &&
-            (callee.property as Record<string, unknown>).name === 'random'
-        )
-            return true;
-    }
-    for (const val of Object.values(n)) {
-        if (!val || typeof val !== 'object') continue;
-        if ((val as Record<string, unknown>).type && containsMathRandom(val)) return true;
-        if (
-            Array.isArray(val) &&
-            val.some(
-                (v: unknown) =>
-                    v && typeof v === 'object' && (v as Record<string, unknown>).type && containsMathRandom(v),
+function containsMathRandom(root: unknown): boolean {
+    const stack: unknown[] = [root];
+    while (stack.length > 0) {
+        const node = stack.pop();
+        if (!node || typeof node !== 'object') continue;
+        const n = node as Record<string, unknown>;
+        if (n.type === 'CallExpression') {
+            const callee = n.callee as Record<string, unknown> | undefined;
+            if (
+                callee?.type === 'MemberExpression' &&
+                !(callee.computed as boolean) &&
+                (callee.object as Record<string, unknown>)?.type === 'Identifier' &&
+                (callee.object as Record<string, unknown>).name === 'Math' &&
+                (callee.property as Record<string, unknown>)?.type === 'Identifier' &&
+                (callee.property as Record<string, unknown>).name === 'random'
             )
-        )
-            return true;
+                return true;
+        }
+        for (const val of Object.values(n)) {
+            if (!val || typeof val !== 'object') continue;
+            if (Array.isArray(val)) {
+                for (const v of val) {
+                    if (v && typeof v === 'object' && (v as Record<string, unknown>).type) stack.push(v);
+                }
+            } else if ((val as Record<string, unknown>).type) {
+                stack.push(val);
+            }
+        }
     }
     return false;
 }

@@ -21,7 +21,8 @@ export const noHardcodedConnectionString: CodeAnchorRule = {
     },
 
     create(context) {
-        const filename: string = (context as unknown as { filename?: string }).filename ?? context.getFilename();
+        const filename: string =
+            (context as { filename?: string; getFilename(): string }).filename ?? context.getFilename();
         if (isTestFile(filename)) return {};
 
         return {

@@ -39,7 +39,7 @@ export const noUnguardedUrlConstructor: CodeAnchorRule = {
                     return;
 
                 const ancestors: Node[] =
-                    (context as unknown as { getAncestors?(): Node[] }).getAncestors?.() ??
+                    (context as { getAncestors?(): Node[] }).getAncestors?.() ??
                     context.sourceCode?.getAncestors?.(node) ??
                     [];
 

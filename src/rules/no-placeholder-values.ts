@@ -42,7 +42,8 @@ export const noPlaceholderValues: CodeAnchorRule = {
     create(context) {
         const options = (context.options[0] ?? {}) as { patterns?: string[]; skipTestFiles?: boolean };
         const skipTests: boolean = options.skipTestFiles ?? true;
-        const filename: string = (context as unknown as { filename?: string }).filename ?? context.getFilename();
+        const filename: string =
+            (context as { filename?: string; getFilename(): string }).filename ?? context.getFilename();
         if (skipTests && isTestFile(filename)) return {};
 
         const extra: RegExp[] = (options.patterns ?? []).map((p) => new RegExp(p, 'i'));
