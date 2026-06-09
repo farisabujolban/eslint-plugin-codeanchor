@@ -1,0 +1,3 @@
+echo "Pre-commit hook triggered."
+
+npx lint-staged --config lint-staged.config.mjs

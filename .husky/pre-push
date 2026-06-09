@@ -1,0 +1,3 @@
+echo "Pre-push hook triggered."
+
+npm run tc && npm run lint && npm run test

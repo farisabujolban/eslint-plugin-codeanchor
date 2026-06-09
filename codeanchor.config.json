@@ -1,0 +1,26 @@
+{
+    "exclude": ["dist/**", "node_modules/**", "vitest.config.ts", "src/types.ts"],
+    "rules": {
+        "CA-CD001": false,
+        "CA-CI001": false,
+        "CA-CI003": false,
+        "CA-DOCKER001": false,
+        "CA-DOCKER002": false,
+        "CA-OWN001": false,
+        "CA-PKG003": { "severity": "error" },
+        "CA-PKG004": { "severity": "error" },
+        "CA-DOCS004": { "severity": "warn" },
+        "CA-DEPS001": { "severity": "warn" },
+        "CA-PUBLISH001": { "severity": "error" },
+        "CA-EXPORT001": { "severity": "warn" },
+        "CA-TSCONFIG001": { "severity": "error" },
+        "CA-TSCONFIG002": { "severity": "warn" },
+        "ISO-MAI003": { "severity": "warn", "threshold": 25 },
+        "ISO-MAI004": { "severity": "info" },
+        "ISO-REL002": { "severity": "warn" },
+        "ISO-REL003": { "severity": "warn" },
+        "ISO-REL004": { "severity": "warn" },
+        "ISO-SEC001": { "severity": "error" },
+        "ISO-SEC002": { "severity": "error" }
+    }
+}
