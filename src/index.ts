@@ -16,6 +16,7 @@ import { noInsecureRandomForSecret } from './rules/no-insecure-random-for-secret
 import { noUnguardedUrlConstructor } from './rules/no-unguarded-url-constructor.js';
 import { noHardcodedConnectionString } from './rules/no-hardcoded-connection-string.js';
 import { noResourceLeak } from './rules/no-resource-leak.js';
+import { noFloatingPointEquality } from './rules/no-floating-point-equality.js';
 
 const plugin = {
     meta: {
@@ -41,6 +42,7 @@ const plugin = {
         'no-unguarded-url-constructor': noUnguardedUrlConstructor,
         'no-hardcoded-connection-string': noHardcodedConnectionString,
         'no-resource-leak': noResourceLeak,
+        'no-floating-point-equality': noFloatingPointEquality,
     },
     configs: {} as Record<string, unknown>,
 };
@@ -67,6 +69,7 @@ plugin.configs['recommended'] = {
         'codeanchor/no-unguarded-url-constructor': 'warn',
         'codeanchor/no-hardcoded-connection-string': 'error',
         'codeanchor/no-resource-leak': 'warn',
+        'codeanchor/no-floating-point-equality': 'warn',
     },
 };
 
@@ -92,6 +95,7 @@ plugin.configs['legacy'] = {
         'codeanchor/no-unguarded-url-constructor': 'warn',
         'codeanchor/no-hardcoded-connection-string': 'error',
         'codeanchor/no-resource-leak': 'warn',
+        'codeanchor/no-floating-point-equality': 'warn',
     },
 };
 
