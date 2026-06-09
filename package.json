@@ -48,7 +48,7 @@
     "devDependencies": {
         "@commitlint/cli": "^21.0.2",
         "@commitlint/config-conventional": "^21.0.2",
-        "@farisabujolban/eslint-plugin-codeanchor": "file:.",
+        "@farisabujolban/eslint-plugin-codeanchor": "^0.2.0",
         "@release-it/conventional-changelog": "^11.0.1",
         "@types/node": "^22.0.0",
         "@typescript-eslint/parser": "^8.0.0",
