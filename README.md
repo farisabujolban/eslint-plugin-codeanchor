@@ -20,30 +20,28 @@ npm install --save-dev @farisabujolban/eslint-plugin-codeanchor
 
 ```js
 // eslint.config.js
-import codeanchor from '@farisabujolban/eslint-plugin-codeanchor'
+import codeanchor from '@farisabujolban/eslint-plugin-codeanchor';
 
-export default [
-  codeanchor.configs.recommended,
-]
+export default [codeanchor.configs.recommended];
 ```
 
 Or enable rules individually:
 
 ```js
 // eslint.config.js
-import codeanchor from '@farisabujolban/eslint-plugin-codeanchor'
+import codeanchor from '@farisabujolban/eslint-plugin-codeanchor';
 
 export default [
-  {
-    plugins: { 'codeanchor': codeanchor },
-    rules: {
-      'codeanchor/todo-requires-issue': 'warn',
-      'codeanchor/temp-comment-requires-condition': 'warn',
-      'codeanchor/no-commented-out-code': 'warn',
-      'codeanchor/env-var-declared': 'error',
+    {
+        plugins: { codeanchor: codeanchor },
+        rules: {
+            'codeanchor/todo-requires-issue': 'warn',
+            'codeanchor/temp-comment-requires-condition': 'warn',
+            'codeanchor/no-commented-out-code': 'warn',
+            'codeanchor/env-var-declared': 'error',
+        },
     },
-  },
-]
+];
 ```
 
 ### ESLint v8 (legacy `.eslintrc`)
@@ -51,21 +49,21 @@ export default [
 ```js
 // .eslintrc.js
 module.exports = {
-  plugins: ['@farisabujolban/codeanchor'],
-  extends: ['plugin:@farisabujolban/codeanchor/legacy'],
-}
+    plugins: ['@farisabujolban/codeanchor'],
+    extends: ['plugin:@farisabujolban/codeanchor/legacy'],
+};
 ```
 
 ---
 
 ## Rules
 
-| Rule | Description | Default | Fixable |
-|---|---|---|---|
-| `codeanchor/todo-requires-issue` | TODO/FIXME/HACK must include an issue reference | warn | No |
-| `codeanchor/temp-comment-requires-condition` | Temporary/workaround comments must specify a removal condition | warn | No |
-| `codeanchor/no-commented-out-code` | Warn on comment blocks that look like commented-out code | warn | No |
-| `codeanchor/env-var-declared` | `process.env.X` / `import.meta.env.X` must be declared in `.env.example` | error | No |
+| Rule                                         | Description                                                              | Default | Fixable |
+| -------------------------------------------- | ------------------------------------------------------------------------ | ------- | ------- |
+| `codeanchor/todo-requires-issue`             | TODO/FIXME/HACK must include an issue reference                          | warn    | No      |
+| `codeanchor/temp-comment-requires-condition` | Temporary/workaround comments must specify a removal condition           | warn    | No      |
+| `codeanchor/no-commented-out-code`           | Warn on comment blocks that look like commented-out code                 | warn    | No      |
+| `codeanchor/env-var-declared`                | `process.env.X` / `import.meta.env.X` must be declared in `.env.example` | error   | No      |
 
 ---
 
@@ -92,17 +90,20 @@ Flags `TODO`, `FIXME`, and `HACK` comments that don't include a trackable refere
 
 ```json
 {
-  "codeanchor/todo-requires-issue": ["warn", {
-    "tags": ["TODO", "FIXME", "HACK"],
-    "pattern": "#\\d+|https://"
-  }]
+    "codeanchor/todo-requires-issue": [
+        "warn",
+        {
+            "tags": ["TODO", "FIXME", "HACK"],
+            "pattern": "#\\d+|https://"
+        }
+    ]
 }
 ```
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `tags` | `string[]` | `["TODO", "FIXME", "HACK"]` | Keywords to enforce |
-| `pattern` | `string` | built-in | Custom regex that counts as an issue reference |
+| Option    | Type       | Default                     | Description                                    |
+| --------- | ---------- | --------------------------- | ---------------------------------------------- |
+| `tags`    | `string[]` | `["TODO", "FIXME", "HACK"]` | Keywords to enforce                            |
+| `pattern` | `string`   | built-in                    | Custom regex that counts as an issue reference |
 
 ---
 
@@ -127,17 +128,20 @@ Flags temporary/workaround comments that don't say when they should be removed.
 
 ```json
 {
-  "codeanchor/temp-comment-requires-condition": ["warn", {
-    "keywords": ["TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"],
-    "requireIssue": false
-  }]
+    "codeanchor/temp-comment-requires-condition": [
+        "warn",
+        {
+            "keywords": ["TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"],
+            "requireIssue": false
+        }
+    ]
 }
 ```
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `keywords` | `string[]` | `["TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"]` | Trigger keywords |
-| `requireIssue` | `boolean` | `false` | When `true`, a URL or issue ref is required (condition phrases are not enough) |
+| Option         | Type       | Default                                                | Description                                                                    |
+| -------------- | ---------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `keywords`     | `string[]` | `["TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"]` | Trigger keywords                                                               |
+| `requireIssue` | `boolean`  | `false`                                                | When `true`, a URL or issue ref is required (condition phrases are not enough) |
 
 ---
 
@@ -167,15 +171,18 @@ To suppress a specific block use ESLint's standard inline disable:
 
 ```json
 {
-  "codeanchor/no-commented-out-code": ["warn", {
-    "threshold": 0.5
-  }]
+    "codeanchor/no-commented-out-code": [
+        "warn",
+        {
+            "threshold": 0.5
+        }
+    ]
 }
 ```
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `threshold` | `number` (0–1) | `0.5` | Fraction of lines that must match code heuristics to trigger |
+| Option      | Type           | Default | Description                                                  |
+| ----------- | -------------- | ------- | ------------------------------------------------------------ |
+| `threshold` | `number` (0–1) | `0.5`   | Fraction of lines that must match code heuristics to trigger |
 
 ---
 
@@ -187,30 +194,33 @@ Every `process.env.FOO` or `import.meta.env.FOO` access must have `FOO` declared
 // .env.example contains: DATABASE_URL, PORT
 
 // ✓ OK
-const url = process.env.DATABASE_URL
-const port = process.env.PORT
-const mode = import.meta.env.MODE  // if MODE is declared
+const url = process.env.DATABASE_URL;
+const port = process.env.PORT;
+const mode = import.meta.env.MODE; // if MODE is declared
 
 // ✗ Error
-const secret = process.env.JWT_SECRET  // not in .env.example
-const key = import.meta.env.API_KEY    // not in .env.example
+const secret = process.env.JWT_SECRET; // not in .env.example
+const key = import.meta.env.API_KEY; // not in .env.example
 ```
 
 **Options:**
 
 ```json
 {
-  "codeanchor/env-var-declared": ["error", {
-    "envFiles": [".env.example", ".env.sample"],
-    "allowDynamic": false
-  }]
+    "codeanchor/env-var-declared": [
+        "error",
+        {
+            "envFiles": [".env.example", ".env.sample"],
+            "allowDynamic": false
+        }
+    ]
 }
 ```
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `envFiles` | `string[]` | `[".env.example", ".env.sample"]` | Env file names to load keys from |
-| `allowDynamic` | `boolean` | `false` | When `true`, dynamic access like `process.env[key]` is not flagged |
+| Option         | Type       | Default                           | Description                                                        |
+| -------------- | ---------- | --------------------------------- | ------------------------------------------------------------------ |
+| `envFiles`     | `string[]` | `[".env.example", ".env.sample"]` | Env file names to load keys from                                   |
+| `allowDynamic` | `boolean`  | `false`                           | When `true`, dynamic access like `process.env[key]` is not flagged |
 
 The plugin walks up the directory tree from the linted file to find the project root (stops at a directory containing one of `envFiles`, `package.json`, or `.git`).
 
@@ -231,3 +241,7 @@ npm test
 ```
 
 PRs welcome. No AI in the rule logic.
+
+## License
+
+MIT © Faris Abujolban
