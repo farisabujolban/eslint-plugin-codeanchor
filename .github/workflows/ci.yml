@@ -32,4 +32,8 @@ jobs:
 
             - run: npm run test:coverage
 
+            - uses: codecov/codecov-action@v5
+              with:
+                  files: coverage/lcov.info
+
             - run: npm audit --audit-level=high
