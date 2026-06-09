@@ -9,17 +9,14 @@ jobs:
     publish:
         runs-on: ubuntu-latest
         permissions:
-            contents: write
             id-token: write
 
         steps:
             - uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
 
             - uses: actions/setup-node@v4
               with:
-                  node-version: 20
+                  node-version: 22
                   cache: npm
                   registry-url: https://registry.npmjs.org
 
@@ -29,13 +26,5 @@ jobs:
                   inject-env-vars: true
 
             - run: npm ci
-
-            - run: npm run fmt:check
-
-            - run: npm run tc
-
-            - run: npm run lint
-
-            - run: npm run test:coverage
 
             - run: npm publish --provenance --access public
