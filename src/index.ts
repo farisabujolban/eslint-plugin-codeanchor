@@ -17,6 +17,7 @@ import { noUnguardedUrlConstructor } from './rules/no-unguarded-url-constructor.
 import { noHardcodedConnectionString } from './rules/no-hardcoded-connection-string.js';
 import { noResourceLeak } from './rules/no-resource-leak.js';
 import { noFloatingPointEquality } from './rules/no-floating-point-equality.js';
+import { noDateConstructorWithoutArgs } from './rules/no-date-constructor-without-args.js';
 
 const plugin = {
     meta: {
@@ -43,6 +44,7 @@ const plugin = {
         'no-hardcoded-connection-string': noHardcodedConnectionString,
         'no-resource-leak': noResourceLeak,
         'no-floating-point-equality': noFloatingPointEquality,
+        'no-date-constructor-without-args': noDateConstructorWithoutArgs,
     },
     configs: {} as Record<string, unknown>,
 };
@@ -70,6 +72,7 @@ plugin.configs['recommended'] = {
         'codeanchor/no-hardcoded-connection-string': 'error',
         'codeanchor/no-resource-leak': 'warn',
         'codeanchor/no-floating-point-equality': 'warn',
+        'codeanchor/no-date-constructor-without-args': 'warn',
     },
 };
 
@@ -96,6 +99,7 @@ plugin.configs['legacy'] = {
         'codeanchor/no-hardcoded-connection-string': 'error',
         'codeanchor/no-resource-leak': 'warn',
         'codeanchor/no-floating-point-equality': 'warn',
+        'codeanchor/no-date-constructor-without-args': 'warn',
     },
 };
 
