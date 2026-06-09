@@ -8,10 +8,13 @@ function isCredentialName(name: string): boolean {
 }
 
 function containsMathRandom(root: unknown): boolean {
+    const visited = new Set<unknown>();
     const stack: unknown[] = [root];
     while (stack.length > 0) {
         const node = stack.pop();
         if (!node || typeof node !== 'object') continue;
+        if (visited.has(node)) continue;
+        visited.add(node);
         const n = node as Record<string, unknown>;
         if (n.type === 'CallExpression') {
             const callee = n.callee as Record<string, unknown> | undefined;
