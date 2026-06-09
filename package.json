@@ -61,6 +61,6 @@
         "release-it": "^20.2.0",
         "typescript": "^5.4.0",
         "typescript-eslint": "^8.0.0",
-        "vitest": "^1.6.0"
+        "vitest": "^4.1.8"
     }
 }
