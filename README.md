@@ -1,8 +1,12 @@
 # eslint-plugin-codeanchor
 
+[![npm version](https://img.shields.io/npm/v/@farisabujolban/eslint-plugin-codeanchor)](https://www.npmjs.com/package/@farisabujolban/eslint-plugin-codeanchor)
+[![CI](https://img.shields.io/github/actions/workflow/status/farisabujolban/eslint-plugin-codeanchor/ci.yml?branch=main&label=CI)](https://github.com/farisabujolban/eslint-plugin-codeanchor/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/@farisabujolban/eslint-plugin-codeanchor)](LICENSE)
+
 ESLint plugin enforcing source-level maintainability conventions that standard linting tools don't cover: issue-linked TODOs, scoped temporary code, commented-out code detection, and declared environment variables.
 
-Companion to [`codeanchor`](https://github.com/your-org/codeanchor) CLI — the CLI handles git-aware cross-file checks; this plugin handles AST-level single-file checks.
+Companion to [`codeanchor`](https://github.com/farisabujolban/codeanchor) CLI — the CLI handles git-aware cross-file checks; this plugin handles AST-level single-file checks.
 
 ---
 
@@ -228,7 +232,7 @@ The plugin walks up the directory tree from the linted file to find the project 
 
 ## Companion tool
 
-[`codeanchor`](https://github.com/your-org/codeanchor) — CLI for git-aware, cross-file drift checks: stale ownership, dead approval requirements, and workflow decay. Complements this plugin — run both for full coverage.
+[`codeanchor`](https://github.com/farisabujolban/codeanchor) — CLI for git-aware, cross-file drift checks: stale ownership, dead approval requirements, and workflow decay. Complements this plugin — run both for full coverage.
 
 ---
 
