@@ -20,15 +20,8 @@ jobs:
                   cache: npm
                   registry-url: https://registry.npmjs.org
 
-            - uses: dopplerhq/secrets-fetch-action@v1.3.0
-              with:
-                  doppler-token: ${{ secrets.DOPPLER_TOKEN }}
-                  inject-env-vars: true
-
             - run: npm ci
 
             - run: npm test
 
-            - run: npm publish --provenance --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+            - run: npm publish --access public
