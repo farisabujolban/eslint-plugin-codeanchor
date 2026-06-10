@@ -2,6 +2,10 @@
     "name": "@farisabujolban/eslint-plugin-codeanchor",
     "version": "0.2.1",
     "description": "ESLint plugin enforcing issue-linked TODOs, scoped temporary code, and declared environment variables",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/farisabujolban/eslint-plugin-codeanchor"
+    },
     "license": "MIT",
     "type": "module",
     "main": "dist/index.js",
