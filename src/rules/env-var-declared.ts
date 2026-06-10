@@ -47,7 +47,7 @@ export const envVarDeclared: CodeAnchorRule = {
         const envFiles = options.envFiles ?? ['.env.example', '.env.sample'];
         const allowDynamic = options.allowDynamic ?? false;
 
-        const filename = context.filename ?? context.getFilename();
+        const filename = context.filename;
 
         function report(node: MemberExpression & Rule.NodeParentExtension, name: string | null) {
             if (name === null) {
