@@ -54,7 +54,7 @@
         "@commitlint/config-conventional": "^21.0.2",
         "@farisabujolban/eslint-plugin-codeanchor": "^0.2.0",
         "@release-it/conventional-changelog": "^11.0.1",
-        "@types/node": "^22.0.0",
+        "@types/node": "^25.9.2",
         "@typescript-eslint/parser": "^8.0.0",
         "@typescript-eslint/rule-tester": "^8.0.0",
         "@vitest/coverage-v8": "^4.1.8",
