@@ -22,6 +22,7 @@ import { noArraySortWithoutComparator } from './rules/no-array-sort-without-comp
 import { noProcessExit } from './rules/no-process-exit.js';
 import { noTemplateLiteralInSql } from './rules/no-template-literal-in-sql.js';
 import { noOpenRedirect } from './rules/no-open-redirect.js';
+import { noMixedAsyncStyles } from './rules/no-mixed-async-styles.js';
 
 const plugin = {
     meta: {
@@ -53,6 +54,7 @@ const plugin = {
         'no-process-exit': noProcessExit,
         'no-template-literal-in-sql': noTemplateLiteralInSql,
         'no-open-redirect': noOpenRedirect,
+        'no-mixed-async-styles': noMixedAsyncStyles,
     },
     configs: {} as Record<string, unknown>,
 };
