@@ -19,6 +19,7 @@ import { noResourceLeak } from './rules/no-resource-leak.js';
 import { noFloatingPointEquality } from './rules/no-floating-point-equality.js';
 import { noDateConstructorWithoutArgs } from './rules/no-date-constructor-without-args.js';
 import { noArraySortWithoutComparator } from './rules/no-array-sort-without-comparator.js';
+import { noProcessExit } from './rules/no-process-exit.js';
 
 const plugin = {
     meta: {
@@ -47,6 +48,7 @@ const plugin = {
         'no-floating-point-equality': noFloatingPointEquality,
         'no-date-constructor-without-args': noDateConstructorWithoutArgs,
         'no-array-sort-without-comparator': noArraySortWithoutComparator,
+        'no-process-exit': noProcessExit,
     },
     configs: {} as Record<string, unknown>,
 };
