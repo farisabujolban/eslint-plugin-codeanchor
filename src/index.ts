@@ -18,6 +18,11 @@ import { noHardcodedConnectionString } from './rules/no-hardcoded-connection-str
 import { noResourceLeak } from './rules/no-resource-leak.js';
 import { noFloatingPointEquality } from './rules/no-floating-point-equality.js';
 import { noDateConstructorWithoutArgs } from './rules/no-date-constructor-without-args.js';
+import { noArraySortWithoutComparator } from './rules/no-array-sort-without-comparator.js';
+import { noProcessExit } from './rules/no-process-exit.js';
+import { noTemplateLiteralInSql } from './rules/no-template-literal-in-sql.js';
+import { noOpenRedirect } from './rules/no-open-redirect.js';
+import { noMixedAsyncStyles } from './rules/no-mixed-async-styles.js';
 
 const plugin = {
     meta: {
@@ -45,6 +50,11 @@ const plugin = {
         'no-resource-leak': noResourceLeak,
         'no-floating-point-equality': noFloatingPointEquality,
         'no-date-constructor-without-args': noDateConstructorWithoutArgs,
+        'no-array-sort-without-comparator': noArraySortWithoutComparator,
+        'no-process-exit': noProcessExit,
+        'no-template-literal-in-sql': noTemplateLiteralInSql,
+        'no-open-redirect': noOpenRedirect,
+        'no-mixed-async-styles': noMixedAsyncStyles,
     },
     configs: {} as Record<string, unknown>,
 };
@@ -73,6 +83,11 @@ plugin.configs['recommended'] = {
         'codeanchor/no-resource-leak': 'warn',
         'codeanchor/no-floating-point-equality': 'warn',
         'codeanchor/no-date-constructor-without-args': 'warn',
+        'codeanchor/no-array-sort-without-comparator': 'warn',
+        'codeanchor/no-process-exit': 'warn',
+        'codeanchor/no-template-literal-in-sql': 'error',
+        'codeanchor/no-open-redirect': 'error',
+        'codeanchor/no-mixed-async-styles': 'warn',
     },
 };
 
@@ -100,6 +115,11 @@ plugin.configs['legacy'] = {
         'codeanchor/no-resource-leak': 'warn',
         'codeanchor/no-floating-point-equality': 'warn',
         'codeanchor/no-date-constructor-without-args': 'warn',
+        'codeanchor/no-array-sort-without-comparator': 'warn',
+        'codeanchor/no-process-exit': 'warn',
+        'codeanchor/no-template-literal-in-sql': 'error',
+        'codeanchor/no-open-redirect': 'error',
+        'codeanchor/no-mixed-async-styles': 'warn',
     },
 };
 
