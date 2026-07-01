@@ -18,6 +18,7 @@ import { noHardcodedConnectionString } from './rules/no-hardcoded-connection-str
 import { noResourceLeak } from './rules/no-resource-leak.js';
 import { noFloatingPointEquality } from './rules/no-floating-point-equality.js';
 import { noDateConstructorWithoutArgs } from './rules/no-date-constructor-without-args.js';
+import { noArraySortWithoutComparator } from './rules/no-array-sort-without-comparator.js';
 
 const plugin = {
     meta: {
@@ -45,6 +46,7 @@ const plugin = {
         'no-resource-leak': noResourceLeak,
         'no-floating-point-equality': noFloatingPointEquality,
         'no-date-constructor-without-args': noDateConstructorWithoutArgs,
+        'no-array-sort-without-comparator': noArraySortWithoutComparator,
     },
     configs: {} as Record<string, unknown>,
 };
@@ -73,6 +75,7 @@ plugin.configs['recommended'] = {
         'codeanchor/no-resource-leak': 'warn',
         'codeanchor/no-floating-point-equality': 'warn',
         'codeanchor/no-date-constructor-without-args': 'warn',
+        'codeanchor/no-array-sort-without-comparator': 'warn',
     },
 };
 
@@ -100,6 +103,7 @@ plugin.configs['legacy'] = {
         'codeanchor/no-resource-leak': 'warn',
         'codeanchor/no-floating-point-equality': 'warn',
         'codeanchor/no-date-constructor-without-args': 'warn',
+        'codeanchor/no-array-sort-without-comparator': 'warn',
     },
 };
 
