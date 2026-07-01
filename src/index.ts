@@ -84,6 +84,10 @@ plugin.configs['recommended'] = {
         'codeanchor/no-floating-point-equality': 'warn',
         'codeanchor/no-date-constructor-without-args': 'warn',
         'codeanchor/no-array-sort-without-comparator': 'warn',
+        'codeanchor/no-process-exit': 'warn',
+        'codeanchor/no-template-literal-in-sql': 'error',
+        'codeanchor/no-open-redirect': 'error',
+        'codeanchor/no-mixed-async-styles': 'warn',
     },
 };
 
@@ -112,6 +116,10 @@ plugin.configs['legacy'] = {
         'codeanchor/no-floating-point-equality': 'warn',
         'codeanchor/no-date-constructor-without-args': 'warn',
         'codeanchor/no-array-sort-without-comparator': 'warn',
+        'codeanchor/no-process-exit': 'warn',
+        'codeanchor/no-template-literal-in-sql': 'error',
+        'codeanchor/no-open-redirect': 'error',
+        'codeanchor/no-mixed-async-styles': 'warn',
     },
 };
 
