@@ -20,6 +20,7 @@ import { noFloatingPointEquality } from './rules/no-floating-point-equality.js';
 import { noDateConstructorWithoutArgs } from './rules/no-date-constructor-without-args.js';
 import { noArraySortWithoutComparator } from './rules/no-array-sort-without-comparator.js';
 import { noProcessExit } from './rules/no-process-exit.js';
+import { noTemplateLiteralInSql } from './rules/no-template-literal-in-sql.js';
 
 const plugin = {
     meta: {
@@ -49,6 +50,7 @@ const plugin = {
         'no-date-constructor-without-args': noDateConstructorWithoutArgs,
         'no-array-sort-without-comparator': noArraySortWithoutComparator,
         'no-process-exit': noProcessExit,
+        'no-template-literal-in-sql': noTemplateLiteralInSql,
     },
     configs: {} as Record<string, unknown>,
 };
