@@ -21,6 +21,7 @@ import { noDateConstructorWithoutArgs } from './rules/no-date-constructor-withou
 import { noArraySortWithoutComparator } from './rules/no-array-sort-without-comparator.js';
 import { noProcessExit } from './rules/no-process-exit.js';
 import { noTemplateLiteralInSql } from './rules/no-template-literal-in-sql.js';
+import { noOpenRedirect } from './rules/no-open-redirect.js';
 
 const plugin = {
     meta: {
@@ -51,6 +52,7 @@ const plugin = {
         'no-array-sort-without-comparator': noArraySortWithoutComparator,
         'no-process-exit': noProcessExit,
         'no-template-literal-in-sql': noTemplateLiteralInSql,
+        'no-open-redirect': noOpenRedirect,
     },
     configs: {} as Record<string, unknown>,
 };
