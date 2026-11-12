@@ -1,6 +1,6 @@
 # eslint-plugin-codeanchor — Rule Reference
 
-Full reference for all 20 rules with option tables and examples.
+Rule reference with option tables and examples. See [companion tools](companion-tools.md) for retired rules and replacements.
 
 ← [Back to README](../README.md)
 
@@ -87,43 +87,6 @@ Flags `TEMP`, `WORKAROUND`, `WIP`, and similar comments that don't say when they
 | -------------- | ---------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------- |
 | `keywords`     | `string[]` | `["TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"]` | Trigger keywords.                                                                     |
 | `requireIssue` | `boolean`  | `false`                                                | When `true`, a URL or issue ref is required — condition phrases alone are not enough. |
-
----
-
-### `codeanchor/comment-expiry-date`
-
-**TODO/TEMP/WORKAROUND comments with a past expiry date.**
-
-Flags comments that include a date that has already passed. Also flags dates more than one year in the future as likely AI-generated placeholders.
-
-```js
-// ✓ OK
-// TODO: clean up after 2025-12 release
-
-// ✗ Flagged (date is past)
-// TODO: remove after 2023-06
-// TEMP: delete by 2022-01-15
-
-// ✗ Flagged (date too far out — likely AI placeholder)
-// TODO: fix by 2035-01-01
-```
-
-**Options:**
-
-```json
-{
-    "codeanchor/comment-expiry-date": [
-        "warn",
-        {
-            "keywords": ["TODO", "FIXME", "HACK", "TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"]
-        }
-    ]
-}
-```
-
-| Option     | Type       | Default                                                                         | Description                         |
-| ---------- | ---------- | ------------------------------------------------------------------------------- | ----------------------------------- |
-| `keywords` | `string[]` | `["TODO", "FIXME", "HACK", "TEMP", "TEMPORARY", "WORKAROUND", "WIP", "REMOVE"]` | Keywords to scan for date patterns. |
 
 ---
 
@@ -336,32 +299,6 @@ No configurable options.
 
 ---
 
-### `codeanchor/require-error-cause`
-
-**Require `{ cause: err }` when re-throwing inside a catch block.**
-
-Without `cause`, the original error is silently dropped and the stack trace is lost. Use `{ cause: err }` to preserve the chain.
-
-```js
-// ✗ Flagged — original error dropped
-try {
-    await db.query(sql);
-} catch {
-    throw new Error('database query failed');
-}
-
-// ✓ OK
-try {
-    await db.query(sql);
-} catch (err) {
-    throw new Error('database query failed', { cause: err });
-}
-```
-
-No configurable options.
-
----
-
 ### `codeanchor/no-resource-leak`
 
 **Require streams, servers, workers, and sockets to be closed in the same scope they are created.**
@@ -424,73 +361,7 @@ No configurable options.
 
 ---
 
-## TypeScript correctness
-
----
-
-### `codeanchor/no-double-type-assertion`
-
-**Flag `as unknown as T` assertions that bypass TypeScript's type checker.**
-
-Double type assertions (`as unknown as T`) suppress every type error on the expression. They indicate a type mismatch that should be fixed properly.
-
-```ts
-// ✗ Flagged
-const user = response as unknown as User;
-const config = data as unknown as Config;
-
-// ✓ OK — proper assertion with a compatible intermediate type
-const user = response as ApiResponse as User;
-// ✓ OK — use a type guard or validate instead
-function isUser(x: unknown): x is User { ... }
-```
-
-No configurable options.
-
----
-
 ## Performance
-
----
-
-### `codeanchor/no-object-spread-accumulator`
-
-**Disallow object spread in `.reduce()` — creates O(n²) allocations.**
-
-Spreading the accumulator inside `.reduce()` creates a new object on every iteration. For large arrays this is a common performance trap.
-
-```js
-// ✗ Flagged — O(n²)
-const obj = items.reduce((acc, item) => ({ ...acc, [item.id]: item }), {});
-
-// ✓ OK — O(n)
-const obj = items.reduce((acc, item) => {
-    acc[item.id] = item;
-    return acc;
-}, {});
-```
-
-No configurable options.
-
----
-
-### `codeanchor/no-promise-constructor-wrap`
-
-**Disallow wrapping a Promise-returning call in `new Promise()`.**
-
-Wrapping `async` functions or Promise-returning calls in `new Promise()` is redundant and may swallow rejections if the inner call throws synchronously before the `resolve`/`reject` is called.
-
-```js
-// ✗ Flagged
-return new Promise((resolve, reject) => {
-    fetch(url).then(resolve).catch(reject);
-});
-
-// ✓ OK — just return the Promise directly
-return fetch(url);
-```
-
-No configurable options.
 
 ---
 
@@ -548,7 +419,3 @@ class ApiClient {
 No configurable options.
 
 ---
-
-## Ecosystem note
-
-> **TODO:** Research overlap with `typescript-eslint`, `eslint-plugin-security`, `eslint-plugin-unicorn`, and `eslint-plugin-n` to document which rules are complementary vs. overlapping. Findings will be added here.

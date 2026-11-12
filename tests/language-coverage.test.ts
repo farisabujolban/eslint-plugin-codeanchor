@@ -5,19 +5,14 @@
  *   1. Plain JS  — default espree parser, no TypeScript
  *   2. TypeScript — @typescript-eslint/parser
  *   3. JSX        — default espree parser with ecmaFeatures.jsx enabled
- *
- * Also verifies the TypeScript-only rule (no-double-type-assertion) is silent
- * with the plain JS parser (TSAsExpression nodes are never emitted).
  */
 
 import { RuleTester } from '@typescript-eslint/rule-tester';
 import { afterAll, describe, it } from 'vitest';
 import { todoRequiresIssue } from '../src/rules/todo-requires-issue.js';
 import { tempCommentRequiresCondition } from '../src/rules/temp-comment-requires-condition.js';
-import { commentExpiryDate } from '../src/rules/comment-expiry-date.js';
 import { noPlaceholderValues } from '../src/rules/no-placeholder-values.js';
 import { noHardcodedConnectionString } from '../src/rules/no-hardcoded-connection-string.js';
-import { noDoubleTypeAssertion } from '../src/rules/no-double-type-assertion.js';
 
 RuleTester.afterAll = afterAll;
 RuleTester.describe = describe;
@@ -101,44 +96,6 @@ tsTester.run('temp-comment-requires-condition [TypeScript]', tempCommentRequires
 jsxTester.run('temp-comment-requires-condition [JSX]', tempCommentRequiresCondition, {
     valid: [{ code: 'const el = <span /> // TEMP: remove when #12 merged' }],
     invalid: [{ code: '// REMOVE: leftover code', errors: [{ messageId: 'missingCondition' }] }],
-});
-
-// ──────────────────────────────────────────────────────────────
-// Tier A: comment-expiry-date
-// ──────────────────────────────────────────────────────────────
-
-plainJsTester.run('comment-expiry-date [plain JS]', commentExpiryDate, {
-    valid: [{ code: '// TODO: no date here, fine' }, { code: '// FIXME: revisit this later' }],
-    invalid: [
-        {
-            code: '// TODO: 2020-01-01 clean up this code',
-            errors: [{ messageId: 'expiredDate' }],
-        },
-        {
-            code: '// TEMP: 2021-06-15 remove after migration',
-            errors: [{ messageId: 'expiredDate' }],
-        },
-    ],
-});
-
-tsTester.run('comment-expiry-date [TypeScript]', commentExpiryDate, {
-    valid: [{ code: '// HACK: no date' }],
-    invalid: [
-        {
-            code: '// TODO: deadline was 2019-03-01',
-            errors: [{ messageId: 'expiredDate' }],
-        },
-    ],
-});
-
-jsxTester.run('comment-expiry-date [JSX]', commentExpiryDate, {
-    valid: [{ code: 'const el = <div /> // NOTE: no date, not flagged' }],
-    invalid: [
-        {
-            code: '// FIXME: 2022-01-01 stale',
-            errors: [{ messageId: 'expiredDate' }],
-        },
-    ],
 });
 
 // ──────────────────────────────────────────────────────────────
@@ -244,14 +201,4 @@ jsxTester.run('no-hardcoded-connection-string [JSX]', noHardcodedConnectionStrin
             errors: [{ messageId: 'hardcodedConnectionString' }],
         },
     ],
-});
-
-// ──────────────────────────────────────────────────────────────
-// Tier E: no-double-type-assertion — must be silent with plain JS
-// (TSAsExpression nodes don't exist outside the TS parser)
-// ──────────────────────────────────────────────────────────────
-
-plainJsTester.run('no-double-type-assertion [plain JS — silent]', noDoubleTypeAssertion, {
-    valid: [{ code: 'const x = 1' }, { code: 'const y = "hello"' }, { code: 'function foo(x) { return x }' }],
-    invalid: [],
 });
