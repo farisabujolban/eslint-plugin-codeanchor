@@ -15,3 +15,9 @@ The rules below were removed from both CodeAnchor presets. Delete any explicit `
 | `no-process-exit`                  | [eslint-plugin-n: `no-process-exit`](https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/no-process-exit.md). Enable `n/no-process-exit` and use file overrides for CLI entry points that deliberately terminate the process.                                                                       |
 | `no-promise-constructor-wrap`      | [eslint-plugin-promise: `avoid-new`](https://github.com/eslint-community/eslint-plugin-promise/blob/main/docs/rules/avoid-new.md). Enable `promise/avoid-new` explicitly. It is stricter: it flags all `new Promise()` calls, so allow intentional constructors where necessary.                                           |
 | `require-error-cause`              | [ESLint: `preserve-caught-error`](https://eslint.org/docs/latest/rules/preserve-caught-error). Enable it explicitly on an ESLint version that provides it. Use `errorClassNames` for project-specific error types.                                                                                                         |
+
+## Optional companion checks
+
+- Use [typescript-eslint's type-checked presets](https://typescript-eslint.io/getting-started/typed-linting/) for checks such as unhandled promises and unsafe use of `any`.
+- Use [Gitleaks](https://github.com/gitleaks/gitleaks) to scan staged changes and Git history for leaked secrets. The CodeAnchor credential rules look for patterns in the files ESLint processes.
+- Use [eslint-plugin-regexp](https://github.com/ota-meshi/eslint-plugin-regexp) for regex correctness and performance, and [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) for accessibility checks on JSX.

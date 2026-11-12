@@ -16,6 +16,7 @@ Use it with the [CodeAnchor CLI](https://github.com/farisabujolban/codeanchor) f
 - [Setup](#setup)
 - [Rules](#rules)
 - [Companion tool](#companion-tool)
+- [Suggested tools](#suggested-tools)
 - [Contributing](#contributing)
 
 ---
@@ -128,7 +129,15 @@ npm install --save-dev @farisabujolban/codeanchor
 
 ---
 
+## Suggested tools
+
+Use ESLint and typescript-eslint for general JS/TS linting. Oxlint can flag accumulating spreads, Unicorn can check dated TODOs, eslint-plugin-n can flag `process.exit()` in library code, and eslint-plugin-promise can flag direct Promise construction.
+
+See the [companion tools and migration guide](docs/companion-tools.md) for the specific rules and settings, plus optional tools for secret scanning, regex checks, and JSX accessibility.
+
 ## Contributing
+
+Before adding a rule, check whether ESLint or an existing plugin already detects the same problem. If it does, document how to enable it in [companion tools](docs/companion-tools.md).
 
 ```bash
 npm install
