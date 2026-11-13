@@ -4,9 +4,9 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/farisabujolban/eslint-plugin-codeanchor/ci.yml?branch=main&label=CI)](https://github.com/farisabujolban/eslint-plugin-codeanchor/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/@farisabujolban/eslint-plugin-codeanchor)](LICENSE)
 
-ESLint plugin for AST-level maintainability and safety checks that standard linting tools don't cover: expired comment deadlines, hardcoded secrets, insecure randomness, unguarded JSON parsing, Promise anti-patterns, resource leaks, and more. 20 rules. No external dependencies.
+ESLint plugin for repository policies such as linking TODOs to issues, documenting when workarounds can be removed, and declaring environment variables in an example file.
 
-Companion to [`@farisabujolban/codeanchor`](https://github.com/farisabujolban/codeanchor) CLI — the CLI handles git-aware cross-file drift; this plugin handles single-file AST-level checks.
+Use it with the [CodeAnchor CLI](https://github.com/farisabujolban/codeanchor) for Git and cross-file checks. The [companion tools guide](docs/companion-tools.md) shows which rules to get from ESLint and other plugins.
 
 ---
 
@@ -16,6 +16,7 @@ Companion to [`@farisabujolban/codeanchor`](https://github.com/farisabujolban/co
 - [Setup](#setup)
 - [Rules](#rules)
 - [Companion tool](#companion-tool)
+- [Suggested tools](#suggested-tools)
 - [Contributing](#contributing)
 
 ---
@@ -82,7 +83,6 @@ Full rule reference with option tables and examples: [docs/rules.md](docs/rules.
 | -------------------------------------------- | ------------------------------------------------------------------------- | ------- | ------- |
 | `codeanchor/todo-requires-issue`             | TODO/FIXME/HACK must include an issue reference (`#123`, URL, `PROJ-123`) | warn    | No      |
 | `codeanchor/temp-comment-requires-condition` | Temporary/workaround comments must specify a removal condition            | warn    | No      |
-| `codeanchor/comment-expiry-date`             | TODO/TEMP/WORKAROUND comments with a past expiry date                     | warn    | No      |
 
 ### Environment & config
 
@@ -106,31 +106,22 @@ Full rule reference with option tables and examples: [docs/rules.md](docs/rules.
 | --------------------------------------------- | -------------------------------------------------------------------------- | ------- | ------- |
 | `codeanchor/no-unguarded-json-parse`          | Require `JSON.parse()` to be wrapped in try/catch                          | warn    | No      |
 | `codeanchor/no-unguarded-url-constructor`     | Require `new URL()` to be wrapped in try/catch                             | warn    | No      |
-| `codeanchor/require-error-cause`              | Require `{ cause: err }` when re-throwing inside a catch block             | warn    | No      |
 | `codeanchor/no-resource-leak`                 | Require streams/servers/workers/sockets to be closed in the same scope     | warn    | No      |
 | `codeanchor/no-floating-point-equality`       | Disallow exact `===` comparisons with floating-point literals (CWE-1339)   | warn    | No      |
 | `codeanchor/no-date-constructor-without-args` | Disallow `new Date()` without arguments — couples code to the system clock | warn    | No      |
 
-### TypeScript correctness
-
-| Rule                                  | Description                                                             | Default | Fixable |
-| ------------------------------------- | ----------------------------------------------------------------------- | ------- | ------- |
-| `codeanchor/no-double-type-assertion` | Flag `as unknown as T` assertions that bypass TypeScript's type checker | warn    | No      |
-
 ### Performance
 
-| Rule                                      | Description                                                                         | Default | Fixable |
-| ----------------------------------------- | ----------------------------------------------------------------------------------- | ------- | ------- |
-| `codeanchor/no-object-spread-accumulator` | Disallow object spread in `.reduce()` — creates O(n²) allocations                   | warn    | No      |
-| `codeanchor/no-promise-constructor-wrap`  | Disallow wrapping a Promise-returning call in `new Promise()` — swallows rejections | error   | No      |
-| `codeanchor/no-sync-in-async`             | Flag synchronous `*Sync` calls inside `async` functions                             | warn    | No      |
-| `codeanchor/no-constructor-side-effect`   | Disallow I/O, timers, and network calls in class constructors                       | warn    | No      |
+| Rule                                    | Description                                                   | Default | Fixable |
+| --------------------------------------- | ------------------------------------------------------------- | ------- | ------- |
+| `codeanchor/no-sync-in-async`           | Flag synchronous `*Sync` calls inside `async` functions       | warn    | No      |
+| `codeanchor/no-constructor-side-effect` | Disallow I/O, timers, and network calls in class constructors | warn    | No      |
 
 ---
 
 ## Companion tool
 
-[`@farisabujolban/codeanchor`](https://github.com/farisabujolban/codeanchor) — CLI for git-aware cross-file drift: stale docs, broken CI/Docker references, missing lockfile updates, env secret leaks, and more. Run both for full coverage.
+[`@farisabujolban/codeanchor`](https://github.com/farisabujolban/codeanchor) checks for stale comments, broken references across repository files, and gaps in test and owner coverage based on Git history.
 
 ```bash
 npm install --save-dev @farisabujolban/codeanchor
@@ -138,7 +129,15 @@ npm install --save-dev @farisabujolban/codeanchor
 
 ---
 
+## Suggested tools
+
+Use ESLint and typescript-eslint for general JS/TS linting. Oxlint can flag accumulating spreads, Unicorn can check dated TODOs, eslint-plugin-n can flag `process.exit()` in library code, and eslint-plugin-promise can flag direct Promise construction.
+
+See the [companion tools and migration guide](docs/companion-tools.md) for the specific rules and settings, plus optional tools for secret scanning, regex checks, and JSX accessibility.
+
 ## Contributing
+
+Before adding a rule, check whether ESLint or an existing plugin already detects the same problem. If it does, document how to enable it in [companion tools](docs/companion-tools.md).
 
 ```bash
 npm install

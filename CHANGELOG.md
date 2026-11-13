@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Breaking: removed seven rules from the plugin and both presets. See the [migration guide](docs/companion-tools.md) for their replacements and any config or comment changes.
+
 ## [0.2.1](https://github.com/farisabujolban/eslint-plugin-codeanchor/compare/v0.2.0...v0.2.1) (2026-06-10)
 
 ### Features
